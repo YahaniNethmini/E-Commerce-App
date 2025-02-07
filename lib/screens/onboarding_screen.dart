@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/welcome_screen.dart';
 import 'package:e_commerce_app/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -47,6 +48,61 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               itemBuilder: (context, index) {
                 return OnboardingPage(data: _pages[index]);
               },
+          ),
+
+          Positioned(
+            top: 48,
+            right: 24,
+            child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WelcomeScreen(),
+                      )
+                  );
+                },
+                child: Text(
+                  "Skip",
+                  style: TextStyle(
+                    color: AppTheme.primaryColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                )
+            ),
+          ),
+
+          Positioned(
+            bottom: 48,
+            left: 24,
+            right: 24,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                      _pages.length,
+                      (index) =>AnimatedContainer(
+                          duration: const Duration(
+                              milliseconds: 300
+                          ),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 4
+                        ),
+                        height: 8,
+                        width: _currentPage == index ? 24 : 8,
+                        decoration: BoxDecoration(
+                          color: AppTheme.primaryColor.withOpacity(
+                              _currentPage == index ? 1 : 0.3
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                      ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
