@@ -101,6 +101,35 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       ),
                   ),
                 ),
+
+                SizedBox(height: 32),
+                Row(
+                  children: [
+                    if(_currentPage > 0)
+                      Expanded(
+                          child: OutlinedButton(
+                              onPressed: (){
+                                _pageController.previousPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                );
+                              },
+                              style: OutlinedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 16
+                                ),
+                                side: BorderSide(
+                                  color: AppTheme.primaryColor,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                              child: Text("Previous"),
+                          ),
+                      ),
+                  ],
+                ),
               ],
             ),
           ),
