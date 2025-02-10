@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/screens/welcome_screen.dart';
 import 'package:e_commerce_app/theme/theme.dart';
+import 'package:e_commerce_app/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -125,7 +126,42 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                               ),
-                              child: Text("Previous"),
+                              child: Text(
+                                "Previous",
+                                style: TextStyle(
+                                  color: AppTheme.primaryColor,
+                                  fontSize: 16,
+                                ),
+                              ),
+                          ),
+                      ),
+
+                    if(_currentPage > 0)
+                      const SizedBox(width: 16),
+                      Expanded(
+                          child: GradientButton(
+                            text: _currentPage == _pages.length - 1
+                                ? "Get Started"
+                                : "Next",
+                            gradient: [
+                              AppTheme.primaryColor,
+                              AppTheme.primaryColor.withOpacity(0.8),
+                            ],
+                            onPressed: (){
+                              if(_currentPage <_pages.length - 1){
+                                _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                );
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => WelcomeScreen(),
+                                    )
+                                );
+                              }
+                            },
                           ),
                       ),
                   ],
