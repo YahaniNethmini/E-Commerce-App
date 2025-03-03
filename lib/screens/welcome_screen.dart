@@ -2,6 +2,7 @@ import 'package:e_commerce_app/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
 
 import '../theme/theme.dart';
+import 'login_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({super.key});
@@ -108,12 +109,12 @@ class WelcomeScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //       builder: (context) => LoginScreen(),
-                          //     )
-                          // );
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              )
+                          );
                         },
                         child: Text(
                           "LogIn",

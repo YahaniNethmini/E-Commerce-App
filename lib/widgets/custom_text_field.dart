@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
           suffixIcon: suffixIcon ?? (isPassword ? IconButton(
             onPressed: (){},
             color: AppTheme.primaryColor,
-            icon: Icon(Icons.vaccines_outlined),
+            icon: Icon(Icons.remove_red_eye_outlined),
           ): null),
 
           border: OutlineInputBorder(
