@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/screens/otp_verification_screen.dart';
 import 'package:e_commerce_app/screens/splash_screen.dart';
 import 'package:e_commerce_app/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
       title: "ShopEase",
       debugShowCheckedModeBanner: false,
       theme: AppTheme.LightTheme,
-      home: SplashScreen(),
+      home: OtpVerificationScreen(),
     );
   }
 }
