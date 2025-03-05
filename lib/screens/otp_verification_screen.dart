@@ -1,5 +1,7 @@
 import 'package:e_commerce_app/theme/theme.dart';
+import 'package:e_commerce_app/widgets/gradient_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class OtpVerificationScreen extends StatefulWidget {
   const OtpVerificationScreen({super.key});
@@ -129,12 +131,76 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                         borderSide: BorderSide(
-                            color: AppTheme.textSecondary.withOpacity(0.3)
+                          color: AppTheme.primaryColor,
+                          width: 2,
                         ),
                       ),
                     ),
+
+                    inputFormatters: [
+                      FilteringTextInputFormatter.digitsOnly,
+                    ],
+                    onChanged: (value){
+                      if(value.isEmpty){
+                        if(index < otpLength - 1){
+                          _focusNode[index + 1].requestFocus();
+                        }
+                        else{
+                          _focusNode[index].unfocus();
+                          _verifyOTP();
+                        }
+                      }
+                      else if(index > 0) {
+                        _focusNode[index - 1].requestFocus();
+                      }
+                    },
                   ),
                 )),
+              ),
+              SizedBox(height: 32),
+              GradientButton(
+                text: _isVerifying ? "Verifying" : "Verify",
+                onPressed: (){
+                  if(!_isVerifying){
+                    _verifyOTP();
+                  }
+                },
+              ),
+              SizedBox(height: 24),
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      "Didn't received the code",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: AppTheme.textSecondary,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    TextButton(
+                      onPressed: _canResend ? (){
+                        setState(() {
+                          _canResend = false;
+                          _resendTimer = 30;
+                        });
+                        _startresendTimer();
+                      } : null,
+                      child: Text(
+                        _canResend
+                            ? "Resend Code"
+                            : "Resend Code in $_resendTimer",
+                        style: TextStyle(
+                          color: _canResend
+                            ? AppTheme.primaryColor
+                            : AppTheme.textSecondary,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
